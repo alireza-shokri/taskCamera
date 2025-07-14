@@ -7,13 +7,12 @@ const allList = document.querySelectorAll(".list");
 const sideBar = document.querySelector(".sidebar");
 const showSideBarBtn = document.getElementById("btnShowSidebar");
 const hideSidebarBtn = document.querySelector(".hide-sidebar");
-
+const toggleAlertsBtn = document.querySelector(".close-alerts");
 const alertColors = {
   high: "red",
   medium: "orange",
   normal: "green",
 };
-
 
 const fakeApiCamera = [
   { id: 1, name: "دوربین 1", status: true },
@@ -24,15 +23,49 @@ const fakeApiCamera = [
 ];
 
 const fakeAlerts = [
-  { id: 1, subject: "تشخیص حرکت غیر عادی", level: "high", location: "حیاط", time: "12:23" },
-  { id: 2, subject: "باز شدن درب", level: "medium", location: "پارکینگ", time: "14:05" },
-  { id: 3, subject: "تشخیص صدا بلند", level: "normal", location: "سالن", time: "16:45" },
-  { id: 4, subject: "حرکت مشکوک ثبت شد", level: "high", location: "حیاط جنوبی", time: "17:15" },
-  { id: 5, subject: "درب عقب باز شد", level: "medium", location: "انبار", time: "18:30" },
-  { id: 6, subject: "حرکت کوچک تشخیص داده شد", level: "normal", location: "حیاط غربی", time: "19:50" },
+  {
+    id: 1,
+    subject: "تشخیص حرکت غیر عادی",
+    level: "high",
+    location: "حیاط",
+    time: "12:23",
+  },
+  {
+    id: 2,
+    subject: "باز شدن درب",
+    level: "medium",
+    location: "پارکینگ",
+    time: "14:05",
+  },
+  {
+    id: 3,
+    subject: "تشخیص صدا بلند",
+    level: "normal",
+    location: "سالن",
+    time: "16:45",
+  },
+  {
+    id: 4,
+    subject: "حرکت مشکوک ثبت شد",
+    level: "high",
+    location: "حیاط جنوبی",
+    time: "17:15",
+  },
+  {
+    id: 5,
+    subject: "درب عقب باز شد",
+    level: "medium",
+    location: "انبار",
+    time: "18:30",
+  },
+  {
+    id: 6,
+    subject: "حرکت کوچک تشخیص داده شد",
+    level: "normal",
+    location: "حیاط غربی",
+    time: "19:50",
+  },
 ];
-
-
 
 function playCamera(name) {
   cameraBox.style.backgroundColor = "#ecf0f1";
@@ -57,7 +90,9 @@ function renderCameraList() {
     div.textContent = `${status ? "🟢" : "🔴"} - ${name}`;
 
     div.addEventListener("click", () => {
-      document.querySelectorAll(".camera-item").forEach(item => item.classList.remove("active"));
+      document
+        .querySelectorAll(".camera-item")
+        .forEach((item) => item.classList.remove("active"));
       div.classList.add("active");
 
       if (status) {
@@ -73,10 +108,15 @@ function renderCameraList() {
 }
 
 function renderAlerts() {
-  [listDanger, listMedium, listNormal].forEach(list => list.innerHTML = "");
+  [listDanger, listMedium, listNormal].forEach((list) => (list.innerHTML = ""));
 
   fakeAlerts.forEach(({ subject, level, location, time }) => {
-    const list = level === "high" ? listDanger : level === "medium" ? listMedium : listNormal;
+    const list =
+      level === "high"
+        ? listDanger
+        : level === "medium"
+        ? listMedium
+        : listNormal;
     const li = `
       <li class="item">
         <div class="title">
@@ -98,15 +138,26 @@ function renderAlerts() {
 }
 
 function handleListClicks() {
- allList.forEach((list) =>
-  list.addEventListener("click", function (e) {
-    const li = e.target.closest("li");
-    if (li) {
-      li.classList.toggle("show-detail");
-    }
-  })
-);
-
+  allList.forEach((list) =>
+    list.addEventListener("click", function (e) {
+      const li = e.target.closest("li");
+      if (li) {
+        li.classList.toggle("show-detail");
+      }
+    })
+  );
+}
+let closeAlerts = false;
+function toggleShowAlerts() {
+  if (!closeAlerts) {
+    allList.forEach((list) => (list.innerHTML = ""));
+    toggleAlertsBtn.textContent = "نشون دادن";
+    closeAlerts = true;
+  } else {
+    renderAlerts();
+    toggleAlertsBtn.textContent = "بیصدا کردن";
+    closeAlerts = false;
+  }
 }
 
 function toggleSidebar() {
@@ -121,3 +172,4 @@ window.addEventListener("load", () => {
 
 showSideBarBtn.addEventListener("click", toggleSidebar);
 hideSidebarBtn.addEventListener("click", toggleSidebar);
+toggleAlertsBtn.addEventListener("click", toggleShowAlerts);

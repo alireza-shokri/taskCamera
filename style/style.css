@@ -17,7 +17,6 @@ button {
   -webkit-tap-highlight-color: transparent;
 }
 
-
 .sidebar {
   background-color: #2c3e50;
   color: white;
@@ -90,6 +89,36 @@ button {
 
 .alerts-section h4 {
   padding: 0.1rem;
+}
+.alerts-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.close-alerts {
+  padding: 0.2rem 0.8rem;
+  border: none;
+  border-radius: 0.6rem;
+  background: #0073ffaf;
+  color: white;
+  font-family: sans-serif;
+  font-weight: bold;
+  line-height: 1.7;
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: 0 5px 10px rgba(0, 114, 255, 0.3);
+  transition: all 0.3s ease-in-out;
+}
+
+.close-alerts:hover {
+  transform: scale(1.01);
+  box-shadow: 0 8px 16px rgba(0, 114, 255, 0.4);
+  background: #0073ff93;
+}
+
+.close-alerts:active {
+  transform: scale(0.97);
+  box-shadow: 0 3px 6px rgba(0, 114, 255, 0.2);
 }
 
 .alerts {
@@ -168,7 +197,7 @@ button {
 }
 
 .btn-detail:active {
-  transform:  scale(95%);
+  transform: scale(95%);
 }
 
 .btn-detail:hover {
@@ -285,8 +314,8 @@ button {
     padding: 0.3rem;
   }
   .btn-detail:hover {
-  transform: rotate(0deg) scale(1.1);
-}
+    transform: rotate(0deg) scale(1.1);
+  }
 }
 
 @media screen and (max-width: 1090px) {
