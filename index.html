@@ -7,11 +7,12 @@
     <link rel="stylesheet" href="style/style.css" />
   </head>
   <body>
-    <div class="sidebar">
-      <button class="hide-sidebar">❌</button>
+    <aside class="sidebar">
+      <button class="sidebar-close">❌</button>
       <h3>لیست دوربین‌ها</h3>
-      <div id="cameraList"></div>
-    </div>
+      <nav id="cameraList"></nav>
+    </aside>
+
     <button class="btn-show-sidebar" id="btnShowSidebar">
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -27,39 +28,38 @@
         />
       </svg>
     </button>
-    <div class="main">
-      <div class="live-view" id="liveView">
-        <!-- <iframe src="https://telewebion.com/live/hdtest" frameborder="0"></iframe> -->
-      </div>
 
-      <div class="alerts-section" id="alertsSection">
-        <div class="alerts-header">
+    <main class="main">
+      <section class="live-view" id="liveView">
+        <!-- <iframe src="https://telewebion.com/live/hdtest" frameborder="0"></iframe> -->
+      </section>
+
+      <section class="alerts-section" id="alertsSection">
+        <header class="alerts-header">
           <h4>هشدارهای ایمنی</h4>
           <button class="close-alerts">بیصدا کردن</button>
-        </div>
+        </header>
 
         <div class="alerts">
-          <div class="alert-high">
+          <section class="alert-high">
             <h5 class="danger">شدید</h5>
-
             <ul class="list"></ul>
-          </div>
+          </section>
 
-          <div class="alert-medium">
+          <section class="alert-medium">
             <h5 class="medium">متوسط</h5>
             <ul class="list"></ul>
-          </div>
+          </section>
 
-          <div class="alert-normal">
+          <section class="alert-normal">
             <h5 class="normal">عادی</h5>
             <ul class="list"></ul>
-          </div>
+          </section>
         </div>
-      </div>
-    </div>
+      </section>
+    </main>
 
     <script src="js/dashbord.js"></script>
   </body>
 </html>
-
-<!-- alirez Shokri  -->
+<!-- Alireza Shokri -->

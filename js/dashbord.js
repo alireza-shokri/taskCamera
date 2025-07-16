@@ -6,7 +6,7 @@ const listNormal = document.querySelector(".alert-normal .list");
 const allList = document.querySelectorAll(".list");
 const sideBar = document.querySelector(".sidebar");
 const showSideBarBtn = document.getElementById("btnShowSidebar");
-const hideSidebarBtn = document.querySelector(".hide-sidebar");
+const hideSidebarBtn = document.querySelector(".sidebar-close");
 const toggleAlertsBtn = document.querySelector(".close-alerts");
 const alertColors = {
   high: "red",
