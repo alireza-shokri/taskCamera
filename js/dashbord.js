@@ -3,11 +3,13 @@ const cameraList = document.getElementById("cameraList");
 const listDanger = document.querySelector(".alert-high .list");
 const listMedium = document.querySelector(".alert-medium .list");
 const listNormal = document.querySelector(".alert-normal .list");
-const allList = document.querySelectorAll(".list");
+const lists = document.querySelectorAll(".list");
 const sideBar = document.querySelector(".sidebar");
 const showSideBarBtn = document.getElementById("btnShowSidebar");
 const hideSidebarBtn = document.querySelector(".sidebar-close");
 const toggleAlertsBtn = document.querySelector(".close-alerts");
+let closeAlerts = false;
+
 const alertColors = {
   high: "red",
   medium: "orange",
@@ -69,11 +71,11 @@ const fakeAlerts = [
 
 function playCamera(name) {
   cameraBox.style.backgroundColor = "#ecf0f1";
-  cameraBox.innerHTML = `<span>${name}</span>`;
+  cameraBox.innerHTML = `<span>📷 تصویر زنده ${name}</span>`;
 
   setTimeout(() => {
     cameraBox.innerHTML = `
-      <iframe src="https://telewebion.com/live/hdtest" frameborder="0"></iframe>
+      <iframe src="https://telewebion.com/live/hdtest"></iframe>
     `;
   }, 700);
 }
@@ -85,8 +87,7 @@ function renderCameraList() {
   fakeApiCamera.forEach(({ id, name, status }) => {
     const div = document.createElement("div");
     div.className = `camera-item ${!status ? "offline" : ""}`;
-    div.dataset.id = id;
-    div.dataset.status = status;
+
     div.textContent = `${status ? "🟢" : "🔴"} - ${name}`;
 
     div.addEventListener("click", () => {
@@ -96,9 +97,9 @@ function renderCameraList() {
       div.classList.add("active");
 
       if (status) {
-        playCamera(`📷 تصویر زنده ${name}`);
+        playCamera( name );
       } else {
-        cameraBox.textContent = "⛔️ آفلاین";
+        cameraBox.textContent = `( ${name} ) آفلاین ⛔️`;
         cameraBox.style.backgroundColor = "#e0e0e0";
       }
     });
@@ -108,8 +109,6 @@ function renderCameraList() {
 }
 
 function renderAlerts() {
-  [listDanger, listMedium, listNormal].forEach((list) => (list.innerHTML = ""));
-
   fakeAlerts.forEach(({ subject, level, location, time }) => {
     const list =
       level === "high"
@@ -137,8 +136,8 @@ function renderAlerts() {
   });
 }
 
-function handleListClicks() {
-  allList.forEach((list) =>
+function handleShowDetail() {
+  lists.forEach((list) =>
     list.addEventListener("click", function (e) {
       const li = e.target.closest("li");
       if (li) {
@@ -147,10 +146,10 @@ function handleListClicks() {
     })
   );
 }
-let closeAlerts = false;
+
 function toggleShowAlerts() {
   if (!closeAlerts) {
-    allList.forEach((list) => (list.innerHTML = ""));
+    lists.forEach((list) => (list.innerHTML = ""));
     toggleAlertsBtn.textContent = "نشون دادن";
     closeAlerts = true;
   } else {
@@ -164,10 +163,10 @@ function toggleSidebar() {
   sideBar.classList.toggle("show-sidebar");
 }
 
-window.addEventListener("load", () => {
+window.addEventListener("load", function() {
   renderCameraList();
   renderAlerts();
-  handleListClicks();
+  handleShowDetail();
 });
 
 showSideBarBtn.addEventListener("click", toggleSidebar);
